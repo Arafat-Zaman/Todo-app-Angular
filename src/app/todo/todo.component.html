@@ -1,0 +1,28 @@
+<div class="todo-container">
+    <h1>Todo List</h1>
+    
+    <!-- Add New Todo -->
+    <div class="add-todo">
+      <input type="text" [(ngModel)]="newTodoTitle" placeholder="Enter new todo" />
+      <button (click)="addTodo()">Add</button>
+    </div>
+  
+    <!-- Display Todo List -->
+    <ul>
+        <ul>
+            <!-- Use safe navigation to handle potential null 'todos' -->
+            <li *ngFor="let todo of todos?.length ? todos : []">
+              <!-- Bind the checkbox state and handle the 'change' event -->
+              <input type="checkbox" [(ngModel)]="todo.completed" (change)="toggleCompletion(todo.id)" />
+          
+              <!-- Bind the title input and cast 'EventTarget' to 'HTMLInputElement' in the event handler -->
+              <input type="text" [value]="todo.title" (blur)="updateTodoTitle(todo.id, $event)" />
+          
+              <!-- Delete button to remove the todo -->
+              <button (click)="deleteTodo(todo.id)">Delete</button>
+            </li>
+          </ul>
+          
+    </ul>
+  </div>
+  
